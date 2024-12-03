@@ -7,6 +7,10 @@ exports.registerUser = async (req, res) => {
     try {
         const { name, email, password, role } = req.body;
 
+        if (!name || !email || !password) {
+            return res.status(400).json({ error: 'Name, email, and password are required' });
+        }
+
         // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -24,6 +28,10 @@ exports.registerUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ error: 'Email, password, and password are required' });
+        }
 
         // Check if user exists
         const user = await User.findOne({ email });

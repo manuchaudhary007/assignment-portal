@@ -30,7 +30,7 @@ exports.loginAdmin = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const admin = await User.findOne({ email });
+        const admin = await User.findOne({ email, role: 'admin' });
         if (!admin) return res.status(404).json({ error: 'Admin not found' });
 
         // Validate password

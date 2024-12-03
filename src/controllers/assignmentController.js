@@ -31,7 +31,7 @@ exports.updateAssignmentStatus = async (req, res) => {
         const updatedAssignment = await Assignment.findByIdAndUpdate(
             id,
             { status },
-            { new: true, runValidators: true } // Return updated doc & validate
+            { new: true, runValidators: true }
         );
 
         if (!updatedAssignment) {
