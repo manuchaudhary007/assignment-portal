@@ -1,8 +1,23 @@
 const express = require('express');
-const { getAllAssignments, updateAssignmentStatus } = require('../controllers/assignmentController');
+const { registerAdmin, loginAdmin, getAdminAssignments, acceptAssignment, rejectAssignment } = require('../controllers/adminController');
+const authMiddleware = require('../middleware/authMiddleware');
+
 const router = express.Router();
 
-router.get('/assignments', getAllAssignments);
-router.patch('/assignments/:id', updateAssignmentStatus);
+// Register a new admin
+router.post('/register', registerAdmin);
+
+// Admin login
+router.post('/login', loginAdmin);
+
+// View assignments tagged to the admin
+router.get('/assignments', authMiddleware, getAdminAssignments);
+
+// Accept an assignment
+router.post('/assignments/:id/accept', authMiddleware, acceptAssignment);
+
+// Reject an assignment
+router.post('/assignments/:id/reject', authMiddleware, rejectAssignment);
 
 module.exports = router;
+

@@ -1,7 +1,9 @@
 const express = require('express');
-const { uploadAssignment } = require('../controllers/assignmentController');
+const { registerUser, loginUser, getAdmins } = require('../controllers/userControllers');
 const router = express.Router();
 
-router.post('/upload', uploadAssignment);
+router.post('/register', registerUser);
+router.post('/login', loginUser);
+router.get('/admins', getAdmins);
 
 module.exports = router;

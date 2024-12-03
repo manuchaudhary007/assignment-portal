@@ -1,10 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const connectDB = require('./config/db'); // Import database connection
+const connectDB = require('./config/db');
+
 const userRoutes = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const assignmentRoutes = require('./routes/assignmentRoutes');
 
-// Initialize app and connect database
 const app = express();
 connectDB(); // Connect to MongoDB
 
@@ -13,7 +14,8 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/users', userRoutes);
-app.use('/admin', adminRoutes);
+app.use('/admins', adminRoutes);
+app.use('/assignments', assignmentRoutes);
 
 // Start server
 const PORT = 3000;
