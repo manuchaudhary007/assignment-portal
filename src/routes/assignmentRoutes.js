@@ -5,4 +5,3 @@ const router = express.Router();
 router.post('/upload', uploadAssignment);
 
 module.exports = router;
-
