@@ -1,10 +1,15 @@
-let assignments = []; // Temporary in-memory database
+const mongoose = require('mongoose');
 
-module.exports = {
-    getAssignments: () => assignments,
-    addAssignment: (assignment) => assignments.push(assignment),
-    updateAssignment: (id, status) => {
-        const assignment = assignments.find(a => a.id === id);
-        if (assignment) assignment.status = status;
-    },
-};
+// Define Schema
+const assignmentSchema = new mongoose.Schema({
+    userId: { type: String, required: true },
+    task: { type: String, required: true },
+    admin: { type: String, required: true },
+    status: { type: String, enum: ['pending', 'accepted', 'rejected'], default: 'pending' },
+    timestamp: { type: Date, default: Date.now },
+});
+
+// Create Model
+const Assignment = mongoose.model('Assignment', assignmentSchema);
+
+module.exports = Assignment;
